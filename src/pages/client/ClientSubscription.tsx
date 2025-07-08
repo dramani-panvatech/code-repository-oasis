@@ -79,58 +79,64 @@ const ClientSubscription = () => {
             <CreditCard className="h-6 w-6 text-blue-500" />
             Active Subscriptions
           </h2>
-          
-          {subscriptions.map((subscription, index) => (
-            <Card key={subscription.id} className="backdrop-blur-sm bg-white/80 border-0 shadow-xl hover-scale transition-all duration-300 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-              <CardHeader className="flex flex-row items-center justify-between">
-                <div>
-                  <CardTitle className="flex items-center gap-2">
-                    <Crown className="h-5 w-5 text-purple-500" />
-                    {subscription.name}
-                    <Badge className="bg-green-100 text-green-800 border-green-200">
-                      <CheckCircle className="h-3 w-3 mr-1" />
-                      {subscription.status}
-                    </Badge>
-                  </CardTitle>
-                  <p className="text-gray-600 mt-1 font-semibold">{subscription.price}</p>
-                </div>
-                <Button variant="outline" size="sm" className="hover-scale transition-transform duration-200">
-                  Manage
-                </Button>
-              </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-sm text-gray-600 mb-2">Features included:</p>
-                    <ul className="space-y-1">
-                      {subscription.features.map((feature, index) => (
-                        <li key={index} className="text-sm text-gray-700 flex items-center gap-2">
-                          <Star className="h-3 w-3 text-yellow-500" />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="flex items-center gap-2 p-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg">
-                    <Calendar className="h-4 w-4 text-blue-500" />
-                    <div>
-                      <p className="text-sm text-gray-600">Next billing date</p>
-                      <p className="font-semibold text-blue-600">{subscription.nextBilling}</p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+          <div className='grid gap-4 md:grid-cols-2'>
 
+
+            {subscriptions.map((subscription, index) => (
+              <div className='col'>
+
+
+                <Card key={subscription.id} className="backdrop-blur-sm bg-white/80 border-0 shadow-xl hover-scale transition-all duration-300 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                  <CardHeader className="flex flex-row items-center justify-between">
+                    <div>
+                      <CardTitle className="flex items-center gap-2">
+                        <Crown className="h-5 w-5 text-purple-500" />
+                        {subscription.name}
+                        <Badge className="bg-green-100 text-green-800 border-green-200">
+                          <CheckCircle className="h-3 w-3 mr-1" />
+                          {subscription.status}
+                        </Badge>
+                      </CardTitle>
+                      <p className="text-gray-600 mt-1 font-semibold">{subscription.price}</p>
+                    </div>
+                    <Button variant="outline" size="sm" className="hover-scale transition-transform duration-200">
+                      Manage
+                    </Button>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <p className="text-sm text-gray-600 mb-2">Features included:</p>
+                        <ul className="space-y-1">
+                          {subscription.features.map((feature, index) => (
+                            <li key={index} className="text-sm text-gray-700 flex items-center gap-2">
+                              <Star className="h-3 w-3 text-yellow-500" />
+                              {feature}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="flex items-center gap-2 p-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg">
+                        <Calendar className="h-4 w-4 text-blue-500" />
+                        <div>
+                          <p className="text-sm text-gray-600">Next billing date</p>
+                          <p className="font-semibold text-blue-600">{subscription.nextBilling}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+          </div>
+        </div>
         {/* Active Offerings */}
         <div className="space-y-4">
           <h2 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
             <Gift className="h-6 w-6 text-purple-500" />
             Active Offers & Benefits
           </h2>
-          
+
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {activeOfferings.map((offering, index) => (
               <Card key={offering.id} className="backdrop-blur-sm bg-white/80 border-0 shadow-xl hover-scale transition-all duration-300 animate-fade-in overflow-hidden" style={{ animationDelay: `${index * 0.1}s` }}>
@@ -147,7 +153,7 @@ const ClientSubscription = () => {
                     <span className="text-gray-600">Valid until:</span>
                     <span className="font-medium text-purple-600">{offering.validUntil}</span>
                   </div>
-                  
+
                   {offering.limit && (
                     <div className="space-y-2">
                       <div className="flex items-center justify-between text-sm">
@@ -155,21 +161,21 @@ const ClientSubscription = () => {
                         <span className="font-medium">{offering.used}/{offering.limit}</span>
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div 
+                        <div
                           className={`bg-gradient-to-r ${offering.color} h-2 rounded-full transition-all duration-300`}
                           style={{ width: `${(offering.used / offering.limit) * 100}%` }}
                         />
                       </div>
                     </div>
                   )}
-                  
+
                   {!offering.limit && (
                     <div className="text-sm p-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg">
                       <span className="text-gray-600">Used: </span>
                       <span className="font-medium">{offering.used} times</span>
                     </div>
                   )}
-                  
+
                   <Button size="sm" className={`w-full bg-gradient-to-r ${offering.color} hover:opacity-90 transition-opacity duration-300 hover-scale`}>
                     Use Offer
                   </Button>
