@@ -44,13 +44,23 @@ const ClientSidebar = ({ onWidthChange }: ClientSidebarProps) => {
     { title: 'Settings', url: '/client-settings', icon: Settings },
   ];
 
-  const toggleSidebar = () => {
+
+
+
+
+
+
+
+
+  const ClienttoggleSidebar = () => {
     setCollapsed((prev) => {
       const newCollapsed = !prev;
       const newWidth = newCollapsed ? '80px' : '250px';
       
+      // Update CSS variable for sidebar width
       document.documentElement.style.setProperty('--sidebar-width', newWidth);
       
+      // Notify parent component
       if (onWidthChange) {
         onWidthChange(newWidth);
       }
@@ -114,7 +124,7 @@ const ClientSidebar = ({ onWidthChange }: ClientSidebarProps) => {
         </div>
 
         <button
-          onClick={toggleSidebar}
+          onClick={ClienttoggleSidebar}
           className="absolute top-4 right-4 p-1 rounded-md text-gray-600 dark:text-gray-300 bg-border dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
           aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
